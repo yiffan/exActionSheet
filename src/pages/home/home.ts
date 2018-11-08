@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ActionSheetController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +7,36 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public acSheet: ActionSheetController,
+    public navCtrl: NavController) {
 
+  }
+
+  showAction(){
+    const action = this.acSheet.create({
+      title: 'เลือกรายการ',
+      subTitle: '----------------',
+      buttons: [
+        {
+          text: 'Add'
+        },
+        {
+          text: 'Edit',
+          role: 'edit',
+          handler: () => {
+            console.log('แก้ไขแล้ว')
+          }
+        },
+        {
+          text: 'Delete',
+          role: 'delete',
+          handler: () => {
+            console.log('ลบแล้ว')
+          }
+        }
+      ]
+    });
+    action.present();
   }
 
 }
